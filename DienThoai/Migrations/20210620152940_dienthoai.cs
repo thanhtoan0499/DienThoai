@@ -63,8 +63,8 @@ namespace DienThoai.Migrations
                 columns: table => new
                 {
                     IDKhachHang = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    NameKH = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SDTKH = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NameKH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SDTKH = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     EmailKH = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

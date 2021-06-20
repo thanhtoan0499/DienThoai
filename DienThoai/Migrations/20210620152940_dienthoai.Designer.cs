@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DienThoai.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210620141116_dienthoai")]
+    [Migration("20210620152940_dienthoai")]
     partial class dienthoai
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,10 +47,13 @@ namespace DienThoai.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameKH")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SDTKH")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("IDKhachHang");
 

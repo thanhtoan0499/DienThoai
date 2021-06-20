@@ -45,10 +45,13 @@ namespace DienThoai.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameKH")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SDTKH")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("IDKhachHang");
 
