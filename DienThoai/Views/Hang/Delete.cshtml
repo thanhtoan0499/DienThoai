@@ -1,0 +1,27 @@
+﻿@model DienThoai.Models.Hang
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Xóa</h1>
+
+<h3>Bạn có muốn xóa không?</h3>
+<div>
+    <h4>Hang</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Tên hãng
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenHang)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IDHang" />
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+        <a asp-action="Index">Quay lại</a>
+    </form>
+</div>

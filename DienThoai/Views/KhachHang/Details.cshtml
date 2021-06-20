@@ -1,0 +1,36 @@
+﻿@model DienThoai.Models.KhachHang
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Chi tiết khách hàng</h1>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Tên khách hàng
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NameKH)
+        </dd>
+        <dt class = "col-sm-2">
+            Số điện thoại
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SDTKH)
+        </dd>
+        <dt class = "col-sm-2">
+            Email
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmailKH)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IDKhachHang">Sửa</a> |
+    <a asp-action="Index">Quay lại</a>
+</div>
