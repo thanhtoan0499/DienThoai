@@ -20,6 +20,7 @@ namespace DienThoai.Data
         public DbSet<Hang> Hang { get; set; }
         public DbSet<KhachHang> KhachHang { get; set; }
         public DbSet<SanPham> SanPham { get; set; }
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DienThoai.Data;
 using DienThoai.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace DienThoai.Controllers
 {
     public class SanPhamController : Controller
     {
         private readonly AppDbContext _context;
-
-        public SanPhamController(AppDbContext context)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public SanPhamController(AppDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
         // GET: SanPham
@@ -54,10 +57,21 @@ namespace DienThoai.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,TenSanPham,IDHang,Gia,MoTa,SoLuong,KichThuoc,Ram,CPU")] SanPham sanPham)
+        public async Task<IActionResult> Create([Bind("ID,TenSanPham,IDHang,Gia,Title,ImageFile,MoTa,SoLuong,KichThuoc,Ram,CPU")] SanPham sanPham)
         {
             if (ModelState.IsValid)
             {
+                //Save image to wwwroot/image
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(sanPham.ImageFile.FileName);
+                string extension = Path.GetExtension(sanPham.ImageFile.FileName);
+                sanPham.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await sanPham.ImageFile.CopyToAsync(fileStream);
+                }
+                //Insert record
                 _context.Add(sanPham);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +100,7 @@ namespace DienThoai.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID,TenSanPham,IDHang,Gia,MoTa,SoLuong,KichThuoc,Ram,CPU")] SanPham sanPham)
+        public async Task<IActionResult> Edit(string id, [Bind("ID,TenSanPham,IDHang,Gia,ImageName,ImageFile,MoTa,SoLuong,KichThuoc,Ram,CPU")] SanPham sanPham)
         {
             if (id != sanPham.ID)
             {
@@ -140,6 +154,10 @@ namespace DienThoai.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var sanPham = await _context.SanPham.FindAsync(id);
+            //delete image from wwwroot/image
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "image", sanPham.ImageName);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
             _context.SanPham.Remove(sanPham);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
