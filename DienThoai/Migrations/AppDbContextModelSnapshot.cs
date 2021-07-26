@@ -16,12 +16,12 @@ namespace DienThoai.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DienThoai.Models.Hang", b =>
                 {
-                    b.Property<string>("IDHang")
+                    b.Property<string>("HangID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
@@ -29,32 +29,14 @@ namespace DienThoai.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IDHang");
+                    b.HasKey("HangID");
 
                     b.ToTable("Hang");
                 });
 
-            modelBuilder.Entity("DienThoai.Models.ImageModel", b =>
-                {
-                    b.Property<int>("ImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("ImageId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("DienThoai.Models.KhachHang", b =>
                 {
-                    b.Property<string>("IDKhachHang")
+                    b.Property<string>("KhachHangID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
@@ -71,7 +53,7 @@ namespace DienThoai.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.HasKey("IDKhachHang");
+                    b.HasKey("KhachHangID");
 
                     b.ToTable("KhachHang");
                 });
@@ -92,7 +74,7 @@ namespace DienThoai.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("KichThuoc")
                         .HasColumnType("nvarchar(max)");
@@ -117,8 +99,11 @@ namespace DienThoai.Migrations
 
             modelBuilder.Entity("DienThoai.Models.User", b =>
                 {
-                    b.Property<string>("IDUser")
+                    b.Property<string>("UserID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("KhachHangID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MatKhau")
@@ -133,7 +118,9 @@ namespace DienThoai.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IDUser");
+                    b.HasKey("UserID");
+
+                    b.HasIndex("KhachHangID");
 
                     b.ToTable("User");
                 });
@@ -334,6 +321,15 @@ namespace DienThoai.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DienThoai.Models.User", b =>
+                {
+                    b.HasOne("DienThoai.Models.KhachHang", "KhachHang")
+                        .WithMany("Users")
+                        .HasForeignKey("KhachHangID");
+
+                    b.Navigation("KhachHang");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -383,6 +379,11 @@ namespace DienThoai.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DienThoai.Models.KhachHang", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

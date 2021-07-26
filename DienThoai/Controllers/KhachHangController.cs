@@ -34,7 +34,7 @@ namespace DienThoai.Controllers
             }
 
             var khachHang = await _context.KhachHang
-                .FirstOrDefaultAsync(m => m.IDKhachHang == id);
+                .FirstOrDefaultAsync(m => m.KhachHangID == id);
             if (khachHang == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace DienThoai.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IDKhachHang,NameKH,SDTKH,EmailKH")] KhachHang khachHang)
+        public async Task<IActionResult> Create([Bind("KhachHangID,NameKH,SDTKH,EmailKH")] KhachHang khachHang)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace DienThoai.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IDKhachHang,NameKH,SDTKH,EmailKH")] KhachHang khachHang)
+        public async Task<IActionResult> Edit(string id, [Bind("KhachHangID,NameKH,SDTKH,EmailKH")] KhachHang khachHang)
         {
-            if (id != khachHang.IDKhachHang)
+            if (id != khachHang.KhachHangID)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace DienThoai.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KhachHangExists(khachHang.IDKhachHang))
+                    if (!KhachHangExists(khachHang.KhachHangID))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace DienThoai.Controllers
             }
 
             var khachHang = await _context.KhachHang
-                .FirstOrDefaultAsync(m => m.IDKhachHang == id);
+                .FirstOrDefaultAsync(m => m.KhachHangID == id);
             if (khachHang == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace DienThoai.Controllers
 
         private bool KhachHangExists(string id)
         {
-            return _context.KhachHang.Any(e => e.IDKhachHang == id);
+            return _context.KhachHang.Any(e => e.KhachHangID == id);
         }
     }
 }

@@ -20,7 +20,9 @@
                 @if (User.Identity.IsAuthenticated)
                     {
                     <ul class="navbar-nav flex-grow-1">
-                       
+                       <div class="logo">
+				            <a href="~/home"><img src="~/image/logo.png" title="logo" /></a>
+			            </div>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                         </li>

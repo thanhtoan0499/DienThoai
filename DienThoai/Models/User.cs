@@ -11,7 +11,7 @@ namespace DienThoai.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string IDUser { get; set; }
+        public string UserID { get; set; }
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string TenUser { get; set; }
         [Required(ErrorMessage = "Không được bỏ trống")]
@@ -19,5 +19,7 @@ namespace DienThoai.Models
         [Required(ErrorMessage = "Không được bỏ trống")]
         [DataType(DataType.Password)]
         public string MatKhau { get; set; }
+        public string KhachHangID { get; set; }
+        public KhachHang KhachHang { get; set; }
     }
 }

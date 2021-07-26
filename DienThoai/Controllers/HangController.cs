@@ -34,7 +34,7 @@ namespace DienThoai.Controllers
             }
 
             var hang = await _context.Hang
-                .FirstOrDefaultAsync(m => m.IDHang == id);
+                .FirstOrDefaultAsync(m => m.HangID == id);
             if (hang == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace DienThoai.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IDHang,TenHang")] Hang hang)
+        public async Task<IActionResult> Create([Bind("HangID,TenHang")] Hang hang)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace DienThoai.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IDHang,TenHang")] Hang hang)
+        public async Task<IActionResult> Edit(string id, [Bind("HangID,TenHang")] Hang hang)
         {
-            if (id != hang.IDHang)
+            if (id != hang.HangID)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace DienThoai.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HangExists(hang.IDHang))
+                    if (!HangExists(hang.HangID))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace DienThoai.Controllers
             }
 
             var hang = await _context.Hang
-                .FirstOrDefaultAsync(m => m.IDHang == id);
+                .FirstOrDefaultAsync(m => m.HangID == id);
             if (hang == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace DienThoai.Controllers
 
         private bool HangExists(string id)
         {
-            return _context.Hang.Any(e => e.IDHang == id);
+            return _context.Hang.Any(e => e.HangID == id);
         }
     }
 }

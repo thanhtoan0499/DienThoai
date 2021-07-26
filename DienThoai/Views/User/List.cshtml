@@ -1,0 +1,8 @@
+@model DienThoai.ViewModels.UserListViewModel
+@foreach (var user in Model.User)
+{
+<div>
+    <h2>@user.TenUser</h2>
+        <h2>@user.KhachHang.NameKH</h2>
+</div>
+}

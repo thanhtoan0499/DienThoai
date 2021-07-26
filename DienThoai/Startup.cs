@@ -1,5 +1,6 @@
 
 using DienThoai.Data;
+using DienThoai.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,8 @@ namespace DienThoai
             string connectionString = Configuration.GetConnectionString("default");
             services.AddDbContext<AppDbContext>(c => c.UseSqlServer(connectionString));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddScoped<IKhachHangRepository, KhachHangRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddControllersWithViews();
 
             services.ConfigureApplicationCookie(options => {

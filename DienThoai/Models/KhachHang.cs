@@ -11,7 +11,7 @@ namespace DienThoai.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string IDKhachHang { get; set; }
+        public string KhachHangID { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập trường này")]
         public string NameKH { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập trường này")]
@@ -21,5 +21,6 @@ namespace DienThoai.Models
         [Required(ErrorMessage ="Vui lòng nhập trường này")]
         [EmailAddress(ErrorMessage ="Vui lòng nhập đúng định dạng Email")]
         public string EmailKH { get; set; }
+        public List<User> Users { get; set; }
     }
 }

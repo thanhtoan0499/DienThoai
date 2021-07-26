@@ -11,7 +11,7 @@ namespace DienThoai.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string IDHang { get; set; }
+        public string HangID { get; set; }
         [Required(ErrorMessage ="Vui lòng điền trường này")]
         public string TenHang { get; set; }
 

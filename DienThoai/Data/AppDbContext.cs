@@ -16,15 +16,18 @@ namespace DienThoai.Data
         {
             _options = options;
         }
-        public DbSet<User> User { get; set; }
+       
         public DbSet<Hang> Hang { get; set; }
         public DbSet<KhachHang> KhachHang { get; set; }
         public DbSet<SanPham> SanPham { get; set; }
+         public DbSet<User> User { get; set; }
       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.Entity<SanPham>()
+                .Property(p => p.Gia)
+                .HasColumnType("decimal(18,2)");
         }
     }
    
