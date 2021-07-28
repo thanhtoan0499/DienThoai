@@ -1074,7 +1074,7 @@ ul.top_icon li a {
 }
 
 
-}
+
 .main-menu ul li:last-child a {
      padding-right: 0;
 }
@@ -1090,11 +1090,11 @@ ul.top_icon li a {
      position: relative;
      border-bottom: solid #eee 1px;
 }
-.main-menu ul>li .sub-down li a::before {}
+/* .main-menu ul>li .sub-down li a::before {} */
 .main-menu ul>li .sub-down li a:hover {
      color: #111111;
 }
-.main-menu ul>li .sub-down li a:hover::before {}
+/* .main-menu ul>li .sub-down li a:hover::before {} */
 .main-menu ul li:first-child {
      margin-left: 0;
 }
@@ -1148,9 +1148,9 @@ ul.top_icon li a {
      display: inline-block;
      vertical-align: middle;
 }
-.main-menu ul>li:nth-child (6) {
+/* .main-menu ul>li:nth-child (6) {
      padding-right: 0px;
-}
+} */
 .nav>li {
      position: inherit;
      display: inline-block;
@@ -1164,7 +1164,7 @@ ul.top_icon li a {
      right: 0;
      padding: 15px 0px;
 }
-.sub-full {}
+/* .sub-full {} */
 .simple-down {
      padding: 15px;
 }
@@ -1932,7 +1932,7 @@ margin-top: 40px
 } 
 
 .form-control {
-     border: #ff0000 solid 2px;
+     border: #0362af solid 2px;
      border-radius: inherit;
      margin-bottom: 30px;
      padding: 13px 20px;
@@ -1945,7 +1945,7 @@ margin-top: 40px
 
 .textarea {
      font-family: poppins;
-     border: #ff0000 solid 2px;
+     border: #0362af solid 2px;
      margin-bottom: 30px;
      padding: 13px 20px;
      width: 100%;
@@ -2160,4 +2160,21 @@ ul.location_icon span {
 
 .special-page .relative  {text-align:center !important; }
 
-.special-page .footer {margin-top: 90px;}
+.special-page .footer {margin-top: 70px;}
+
+/* login css */
+.btn-login {
+     font-size: 0.9rem;
+     letter-spacing: 0.05rem;
+     padding: 0.75rem 1rem;
+   }
+   
+   .btn-google {
+     color: white !important;
+     background-color: #ea4335;
+   }
+   
+   .btn-facebook {
+     color: white !important;
+     background-color: #3b5998;
+   }

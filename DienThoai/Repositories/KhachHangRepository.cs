@@ -11,6 +11,6 @@ namespace DienThoai.Repositories
         {
             _appDbContext = appDbContext;
         }
-        public IEnumerable<KhachHang> GetAllKhachHang => _appDbContext.KhachHang;
+        public IEnumerable<KhachHang> GetAllKhachHang() => _appDbContext.KhachHang;
     }
 }

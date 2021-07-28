@@ -1,5 +1,8 @@
-﻿using DienThoai.Models;
+﻿using DienThoai.Data;
+using DienThoai.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,17 +14,29 @@ namespace DienThoai.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        // private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        // public HomeController(ILogger<HomeController> logger)
+        // {
+        //     _logger = logger;
+        // }
+        private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public HomeController(AppDbContext context, IWebHostEnvironment hostEnvironment)
         {
-            _logger = logger;
+            _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
-        public IActionResult Index()
+        // GET: SanPham
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.SanPham.ToListAsync());
         }
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
        
         //public IActionResult Privacy()
         //{
